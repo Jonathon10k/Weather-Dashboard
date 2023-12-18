@@ -11,23 +11,62 @@ header {
 }
 
 #today {
-  padding: 50px;
+  padding: 10px;
+  height: 200px;
+  justify-content: space-around;
+}
+
+#today h2 {
+  font-weight: bold;
 }
 
 #forecast {
   width: 100%;
 }
 
-.tempsquare {
-  width: 250px;
-  height: 220px;
-  text-align: left;
-  padding: 10px 40px;
-
+#forecast h4 {
+  font-weight: bold;
 }
 
 .box-container {
-    justify-content: space-around;
-    border: 1px solid purple;
-    
+  justify-content: space-between;
+}
+
+.forecast-box {
+  width: 180px;
+  height: 220px;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding-left: 10px;
+  background-color: #213b50;
+  color: white;
+}
+
+.forecast-date {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.forecast-temp,
+.forecast-wind,
+.forecast-humidity {
+  font-size: 1.1rem;
+}
+
+.weather-search {
+  width: 100%;
+  padding: 10px;
+}
+
+.search-button {
+  background-color: #7aabff !important;
+  margin: 15px 0;
+}
+
+.search-button:hover {
+  background-color: #9ab7e9 !important;
+}
+
+.input-group * {
+  width: 100%;
 }
