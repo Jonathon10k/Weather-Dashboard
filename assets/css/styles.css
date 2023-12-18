@@ -1,0 +1,33 @@
+header {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    273deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(50, 89, 217, 1) 13%,
+    rgba(41, 74, 187, 1) 50%,
+    rgba(53, 102, 133, 1) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
+#today {
+  padding: 50px;
+}
+
+#forecast {
+  width: 100%;
+}
+
+.tempsquare {
+  width: 250px;
+  height: 220px;
+  text-align: left;
+  padding: 10px 40px;
+
+}
+
+.box-container {
+    justify-content: space-around;
+    border: 1px solid purple;
+    
+}
