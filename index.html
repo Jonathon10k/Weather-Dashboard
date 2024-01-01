@@ -22,7 +22,6 @@
       <h1>Weather Dashboard</h1>
     </header>
 
-    <!-- max-width for ultra wide resolutions -->
     <div class="container-fluid" style="max-width: 1400px">
       <div class="row">
         <aside class="col-lg-3 pb-3">
@@ -50,6 +49,15 @@
                     Search
                   </button>
                   <hr class="hr weather-hr" />
+                  <!-- Generated buttons begin here -->
+                  <button
+                  type="submit"
+                  class="btn btn-primary btn-block search-button"
+                  id="search-button"
+                  aria-label="submit search"
+                >
+                 London
+                </button>
                 </div>
               </div>
             </div>
@@ -65,13 +73,16 @@
             role="region"
             aria-live="polite"
           >
-            <span class="today-header d-flex flex-row">
-              <h2>London (date here)</h2>
-              <i src="">icon</i>
-            </span>
-            <span class="temp">Temp: 13.6 C</span>
-            <span class="wind">Wind: 1.7 KPH</span>
-            <span class="humidity">Humidity: 85%</span>
+            <div class="today-header d-flex flex-row">
+              <h2 class="today-h2">London (date here)</h2>
+              <i class="today-icon"></i>
+            </div>
+            <div class="today-body d-flex flex-column gap-3">
+              <span class="today-temp"></span>
+            <span class="today-wind"></span>
+            <span class="today-humidity"></span>
+            </div>
+            
           </section>
           <!-- End Today section -->
           <section
@@ -81,50 +92,9 @@
             aria-live="polite"
           >
             <h4 class="forecast-heading">5-Day Forecast</h4>
-            <div class="box-container d-flex">
-              <!-- Begin Forecast boxes -->
-              <div
-                class="forecast-box border border-secondary d-flex flex-column"
-              >
-                <span class="forecast-date">16/9/2022</span>
-                <span class="forecast-temp">Temp: 13.6 C</span>
-                <span class="forecast-wind">Wind: 1.7 KPH</span>
-                <span class="forecast-humidity">Humidity: 85%</span>
-              </div>
-              <div
-                class="forecast-box border border-secondary d-flex flex-column"
-              >
-                <span class="forecast-date">16/9/2022</span>
-                <span class="forecast-temp">Temp: 13.6 C</span>
-                <span class="forecast-wind">Wind: 1.7 KPH</span>
-                <span class="forecast-humidity">Humidity: 85%</span>
-              </div>
-              <div
-                class="forecast-box border border-secondary d-flex flex-column"
-              >
-                <span class="forecast-date">17/9/2022</span>
-                <span class="forecast-temp">Temp: 13.6 C</span>
-                <span class="forecast-wind">Wind: 1.7 KPH</span>
-                <span class="forecast-humidity">Humidity: 85%</span>
-              </div>
-              <div
-                class="forecast-box border border-secondary d-flex flex-column"
-              >
-                <span class="forecast-date">18/9/2022</span>
-                <span class="forecast-temp">Temp: 13.6 C</span>
-                <span class="forecast-wind">Wind: 1.7 KPH</span>
-                <span class="forecast-humidity">Humidity: 85%</span>
-              </div>
-              <div
-                class="forecast-box border border-secondary d-flex flex-column"
-              >
-                <span class="forecast-date">10/9/2022</span>
-                <span class="forecast-temp">Temp: 13.6 C</span>
-                <span class="forecast-wind">Wind: 1.7 KPH</span>
-                <span class="forecast-humidity">Humidity: 85%</span>
-              </div>
-              <!-- End Forecast boxes -->
-            </div>
+            <div class="card-container d-flex">
+              <!-- Dynamic card divs go here -->
+               </div>
           </section>
         </div>
       </div>

@@ -1,3 +1,4 @@
+/*** Variables ***/
 header {
   background: rgb(2, 0, 36);
   background: linear-gradient(
@@ -28,16 +29,17 @@ header {
   font-weight: bold;
 }
 
-.box-container {
+.card-container {
   justify-content: space-between;
 }
 
-.forecast-box {
+.forecast-card {
   width: 180px;
-  height: 220px;
+  height: 235px;
   justify-content: space-around;
   align-items: flex-start;
   padding-left: 10px;
+  padding-bottom: 20px;
   background-color: #213b50;
   color: white;
 }
@@ -47,9 +49,8 @@ header {
   font-weight: bold;
 }
 
-.forecast-temp,
-.forecast-wind,
-.forecast-humidity {
+span
+ {
   font-size: 1.1rem;
 }
 
