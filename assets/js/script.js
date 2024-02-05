@@ -1,24 +1,26 @@
-let searchBtn = document.getElementById("search-button");
-let weatherInput = document.getElementById("search-input");
-let cardContainer = document.querySelector(".card-container");
-let todayBody = document.querySelector(".today-body");
-let todayHeader = document.querySelector(".today-header");
-let todayH2 = document.querySelector(".today-h2");
-let todayIcon = document.querySelector(".today-icon");
-let todayTemp = document.querySelector(".today-temp");
-let todayWind = document.querySelector(".today-wind");
-let todayHumidity = document.querySelector(".today-humidity");
-let inputGroup = document.querySelector(".input-group-append");
-let API_KEY = "b219bed2db60f86fada34f7841698d3e";
+const searchBtn = document.getElementById("search-button");
+const weatherInput = document.getElementById("search-input");
+const cardContainer = document.querySelector(".card-container");
+const todayBody = document.querySelector(".today-body");
+const todayHeader = document.querySelector(".today-header");
+const todayH2 = document.querySelector(".today-h2");
+const todayIcon = document.querySelector(".today-icon");
+const todayTemp = document.querySelector(".today-temp");
+const todayWind = document.querySelector(".today-wind");
+const todayHumidity = document.querySelector(".today-humidity");
+const inputGroup = document.querySelector(".input-group-append");
+const API_KEY = "b219bed2db60f86fada34f7841698d3e";
+
+let searchHistory = ["Manchester"];
 
 // Render initial city forecast
 fetchForecast("London");
 
 // Event listener for city search button
-searchBtn.addEventListener("click", (event) => {
+searchBtn.addEventListener("click", event => {
     event.preventDefault();
 
-    if (weatherInput.value !== "") {
+    if (weatherInput.value) {
         fetchForecast(weatherInput.value);
     } else {
         alert("Please enter a location to search.");
@@ -34,27 +36,27 @@ function fetchForecast(city) {
         .then(response => response.json())
         .then(data => renderCards(data))
         .catch(error => console.error("Error:", error));
-}
+};
 
 // Create and render forecast cards to browser
 function renderCards(data) {
 
     // Render today's forecast
     let today = data.list[0]; // Get current day midday forecast
-    
-    todayH2.textContent = `${ data.city.name } (${ dayjs(today.dt_txt).format("DD/MM/YYYY") })`;
+
+    todayH2.textContent = `${data.city.name} (${dayjs(today.dt_txt).format("DD/MM/YYYY")})`;
     todayIcon.innerHTML = `<img width="50px" height="auto" src="assets/images/icons/${today.weather[0].icon}.png"/>`;
     todayTemp.textContent = `Temp: ${(today.main.temp - 273.15).toFixed(2)} °C`;
     todayWind.textContent = `Wind: ${today.wind.speed} KPH`;
-    todayHumidity.textContent = `Humidity: ${today.main.humidity}`;
-       
- // Populate the 5-day forecast container with cards containing OWM forecast data
+    todayHumidity.textContent = `Humidity: ${today.main.humidity} %`;
+
+    // Populate the 5-day forecast container with cards containing OWM forecast data
     cardContainer.innerHTML = "";
-   
+
     // Create a new array from next 5 days'forecast data (today excluded)
     let fiveDayArr = Array(data.list[18], data.list[18], data.list[15], data.list[20], data.list[25]);
     console.log(data)
-   
+
     fiveDayArr.forEach(day => {
         let cardItem = document.createElement("div");
         cardItem.classList.add("forecast-card", "border", "border-secondary", "d-flex", "flex-column");
@@ -72,15 +74,24 @@ function renderCards(data) {
 
     // Add new previous-search button to searches container
     createSearchBtn(data.city.name);
+};
+
+// If input exists and does not pre-exist, create a new previous-search button and add to container
+function createSearchBtn(name) {
+
+    if (name && !searchHistory.includes(name)) {
+        const newBtn = document.createElement("button");
+        newBtn.textContent = name;
+        newBtn.classList.add("btn", "btn-primary", "btn-block", "search-button", "prev-search");
+        searchHistory.push;
+
+        inputGroup.appendChild(newBtn)
+
+    } else {
+        alert("Hint: You can revisit previous forecasts by using the location buttons under the search box.");
+    }
 }
 
-// Create a new previous-search button and add to container
-function createSearchBtn(name) {
-    let newBtn = document.createElement("button");
-    newBtn.textContent = name;
-    newBtn.classList.add("btn", "btn-primary", "btn-block", "search-button");
-    inputGroup.appendChild(newBtn)
-}
 
 
 // TO DO
