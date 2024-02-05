@@ -42,23 +42,27 @@ function fetchForecast(city) {
 
 // Create and render forecast cards to browser
 function renderCards(data) {
+
+    // Get midday forecasts
+    let forecasts = [];
+
+    data.list.forEach(item => {
+        let theHour = new Date(item.dt_txt).getHours();
+        theHour === 12 && forecasts.push(item);
+    });
+
     // Render today's forecast
-    let today = data.list[0]; // Get current day midday forecast
+    let today = forecasts[0]; // Get current day midday forecast
 
     todayH2.textContent = `${data.city.name} (${dayjs(today.dt_txt).format("DD/MM/YYYY")})`;
     todayIcon.innerHTML = `<img width="50px" height="auto" src="assets/images/icons/${today.weather[0].icon}.png"/>`;
     todayTemp.textContent = `Temp: ${(today.main.temp - 273.15).toFixed(2)} °C`;
     todayWind.textContent = `Wind: ${today.wind.speed} KPH`;
     todayHumidity.textContent = `Humidity: ${today.main.humidity} %`;
-
-    // Populate the 5-day forecast container with cards containing OWM forecast data
     cardContainer.innerHTML = "";
 
-    // Create a new array from next 5 days'forecast data (today excluded)
-    let fiveDayArr = Array(data.list[18], data.list[18], data.list[15], data.list[20], data.list[25]);
-    console.log(data)
-
-    fiveDayArr.forEach(day => {
+// Populate the 5-day forecast container with cards containing OWM forecast data
+  forecasts.forEach(day => {
         let cardItem = document.createElement("div");
         cardItem.classList.add("forecast-card", "border", "border-secondary", "d-flex", "flex-column");
         cardItem.innerHTML =
@@ -69,7 +73,7 @@ function renderCards(data) {
             <span class="forecast-humidity">Humidity: ${day.main.humidity} %</span>
             </div>
             `;
-      
+
         cardContainer.appendChild(cardItem);
     });
 
@@ -90,7 +94,7 @@ function createSearchBtn(name) {
         });
         restoredButtons.push(name);
         let storedSearches = JSON.parse(localStorage.getItem("storedSearches"));
-         storedSearches.push(name);
+        storedSearches.push(name);
         localStorage.setItem("storedSearches", JSON.stringify(storedSearches));
         inputGroup.appendChild(newBtn)
 
@@ -101,7 +105,7 @@ function createSearchBtn(name) {
 
 // Render search entries from localStorage 
 function loadStoredSearches() {
-    let storedSearches= JSON.parse(localStorage.getItem("storedSearches"));
+    let storedSearches = JSON.parse(localStorage.getItem("storedSearches"));
 
     storedSearches.forEach(searchTerm => {
         createSearchBtn(searchTerm);
@@ -111,6 +115,5 @@ function loadStoredSearches() {
 
 
 // TO DO
-// 1. Render buttons
 // 2. Fix forecast data processing
 // 4. Screen sizes

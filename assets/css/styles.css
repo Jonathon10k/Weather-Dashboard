@@ -76,3 +76,9 @@ span {
 .input-group * {
   width: 100%;
 }
+
+.weather-icon {
+  background-color: white;
+  border-radius: 50%;
+  padding: 3px;
+}
