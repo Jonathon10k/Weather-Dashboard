@@ -32,7 +32,7 @@
             <div class="form-inline form-group">
               <div class="input-group">
                 <input
-                  class="form-input weather-search"
+                  class="form-input weather-search rounded-2"
                   type="text"
                   id="search-input"
                   placeholder=""
@@ -50,14 +50,6 @@
                   </button>
                   <hr class="hr weather-hr" />
                   <!-- Generated buttons begin here -->
-                  <button
-                  type="submit"
-                  class="btn btn-primary btn-block search-button"
-                  id="search-button"
-                  aria-label="submit search"
-                >
-                 London
-                </button>
                 </div>
               </div>
             </div>
@@ -74,15 +66,14 @@
             aria-live="polite"
           >
             <div class="today-header d-flex flex-row">
-              <h2 class="today-h2">London (date here)</h2>
+              <h2 class="today-h2"></h2>
               <i class="today-icon"></i>
             </div>
             <div class="today-body d-flex flex-column gap-3">
               <span class="today-temp"></span>
-            <span class="today-wind"></span>
-            <span class="today-humidity"></span>
+              <span class="today-wind"></span>
+              <span class="today-humidity"></span>
             </div>
-            
           </section>
           <!-- End Today section -->
           <section
@@ -94,7 +85,7 @@
             <h4 class="forecast-heading">5-Day Forecast</h4>
             <div class="card-container d-flex">
               <!-- Dynamic card divs go here -->
-               </div>
+            </div>
           </section>
         </div>
       </div>

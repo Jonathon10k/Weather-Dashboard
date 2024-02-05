@@ -10,8 +10,27 @@ const todayWind = document.querySelector(".today-wind");
 const todayHumidity = document.querySelector(".today-humidity");
 const inputGroup = document.querySelector(".input-group-append");
 const API_KEY = "b219bed2db60f86fada34f7841698d3e";
+let searchHistory = [];
 
-let searchHistory = ["Manchester"];
+// Load search history from localStorage
+loadStoredSearches()
+
+function createSearchBtn(name) {
+    if (name && !searchHistory.includes(name)) {
+        const newBtn = document.createElement("button");
+        newBtn.textContent = name;
+        newBtn.classList.add("btn", "btn-block", "search-button", "prev-search");
+        newBtn.addEventListener("click", event => {
+            event.preventDefault();
+            fetchForecast(name); // Get fresh forecast data
+        });
+        searchHistory.push(name);
+        inputGroup.appendChild(newBtn)
+
+    } else if (searchHistory.includes(name)) {
+        console.log("NOPE");
+    }
+};
 
 // Render initial city forecast
 fetchForecast("London");
@@ -22,14 +41,14 @@ searchBtn.addEventListener("click", event => {
 
     if (weatherInput.value) {
         fetchForecast(weatherInput.value);
+        weatherInput.value = "";
     } else {
-        alert("Please enter a location to search.");
+        alert("Please enter a forecast location.");
     }
 });
 
 // Fetch forecast data from OpenWeatherMap API
 function fetchForecast(city) {
-
     let queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + API_KEY;
     console.log(queryURL);
     fetch(queryURL)
@@ -40,7 +59,6 @@ function fetchForecast(city) {
 
 // Create and render forecast cards to browser
 function renderCards(data) {
-
     // Render today's forecast
     let today = data.list[0]; // Get current day midday forecast
 
@@ -72,30 +90,48 @@ function renderCards(data) {
         cardContainer.appendChild(cardItem);
     });
 
-    // Add new previous-search button to searches container
+    // Add new search button to past searches container
     createSearchBtn(data.city.name);
 };
 
-// If input exists and does not pre-exist, create a new previous-search button and add to container
+// If input exists and name isn't in searchHistory, create a new search button and add to container
 function createSearchBtn(name) {
-
-    if (name && !searchHistory.includes(name)) {
+    if (name) {
         const newBtn = document.createElement("button");
         newBtn.textContent = name;
-        newBtn.classList.add("btn", "btn-primary", "btn-block", "search-button", "prev-search");
-        searchHistory.push;
-
+        newBtn.classList.add("btn", "btn-block", "search-button", "prev-search");
+        newBtn.addEventListener("click", event => {
+            event.preventDefault();
+            fetchForecast(name); // Get fresh forecast data
+        });
+        let storedSearches = JSON.parse(localStorage.getItem("storedSearches"));
+        storedSearches.push(name);
+        localStorage.setItem("storedSearches", JSON.stringify(storedSearches));
         inputGroup.appendChild(newBtn)
 
-    } else {
-        alert("Hint: You can revisit previous forecasts by using the location buttons under the search box.");
+    } else if (searchHistory.includes(name)) {
+        console.log("NOPE");
     }
-}
+};
 
+// Render search entries from localStorage 
+function loadStoredSearches() {
+    if (!localStorage.getItem("storedSearches") === null) {
+        let searchHistory = JSON.parse(localStorage.getItem("storedSearches"));
+        console.log("exists");
+
+        [...searchHistory].forEach(item => {
+            createSearchBtn(item);
+            console.log("SEE THIS", searchHistory[item])
+        });
+    } else {
+        let storedSearches = [];
+        localStorage.setItem("storedSearches", JSON.stringify(storedSearches));
+    }
+};
 
 
 // TO DO
 // 1. Render buttons
 // 2. Fix forecast data processing
-// 3. Save/load from localStorage
 // 4. Screen sizes
