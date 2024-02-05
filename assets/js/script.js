@@ -10,30 +10,13 @@ const todayWind = document.querySelector(".today-wind");
 const todayHumidity = document.querySelector(".today-humidity");
 const inputGroup = document.querySelector(".input-group-append");
 const API_KEY = "b219bed2db60f86fada34f7841698d3e";
-let searchHistory = [];
+let restoredButtons = [];
 
 // Load search history from localStorage
 loadStoredSearches()
 
-function createSearchBtn(name) {
-    if (name && !searchHistory.includes(name)) {
-        const newBtn = document.createElement("button");
-        newBtn.textContent = name;
-        newBtn.classList.add("btn", "btn-block", "search-button", "prev-search");
-        newBtn.addEventListener("click", event => {
-            event.preventDefault();
-            fetchForecast(name); // Get fresh forecast data
-        });
-        searchHistory.push(name);
-        inputGroup.appendChild(newBtn)
-
-    } else if (searchHistory.includes(name)) {
-        console.log("NOPE");
-    }
-};
-
 // Render initial city forecast
-fetchForecast("London");
+
 
 // Event listener for city search button
 searchBtn.addEventListener("click", event => {
@@ -86,7 +69,7 @@ function renderCards(data) {
             <span class="forecast-humidity">Humidity: ${day.main.humidity} %</span>
             </div>
             `;
-        console.log(day);
+      
         cardContainer.appendChild(cardItem);
     });
 
@@ -96,7 +79,8 @@ function renderCards(data) {
 
 // If input exists and name isn't in searchHistory, create a new search button and add to container
 function createSearchBtn(name) {
-    if (name) {
+
+    if (name && !restoredButtons.includes(`${name}`)) {
         const newBtn = document.createElement("button");
         newBtn.textContent = name;
         newBtn.classList.add("btn", "btn-block", "search-button", "prev-search");
@@ -104,30 +88,25 @@ function createSearchBtn(name) {
             event.preventDefault();
             fetchForecast(name); // Get fresh forecast data
         });
+        restoredButtons.push(name);
         let storedSearches = JSON.parse(localStorage.getItem("storedSearches"));
-        storedSearches.push(name);
+         storedSearches.push(name);
         localStorage.setItem("storedSearches", JSON.stringify(storedSearches));
         inputGroup.appendChild(newBtn)
 
-    } else if (searchHistory.includes(name)) {
-        console.log("NOPE");
+    } else if (restoredButtons.includes(`${name}`)) {
+        console.log("Already exists");
     }
 };
 
 // Render search entries from localStorage 
 function loadStoredSearches() {
-    if (!localStorage.getItem("storedSearches") === null) {
-        let searchHistory = JSON.parse(localStorage.getItem("storedSearches"));
-        console.log("exists");
+    let storedSearches= JSON.parse(localStorage.getItem("storedSearches"));
 
-        [...searchHistory].forEach(item => {
-            createSearchBtn(item);
-            console.log("SEE THIS", searchHistory[item])
-        });
-    } else {
-        let storedSearches = [];
-        localStorage.setItem("storedSearches", JSON.stringify(storedSearches));
-    }
+    storedSearches.forEach(searchTerm => {
+        createSearchBtn(searchTerm);
+        restoredButtons.push(searchTerm);
+    });
 };
 
 
