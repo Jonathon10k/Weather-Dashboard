@@ -64,7 +64,7 @@ function renderCards(data) {
     // Populate the 5-day forecast container with cards containing OWM forecast data
     forecasts.forEach(day => {
         let cardItem = document.createElement("div");
-        cardItem.classList.add("forecast-card", "border", "border-secondary", "d-flex", "flex-column");
+        cardItem.classList.add("forecast-card", "d-flex", "flex-column", "mx-1");
         cardItem.innerHTML =
             `<span class="forecast-date">${dayjs(day.dt_txt).format("DD/MM/YYYY")}</span>
             <span class="weather-icon"><img width="50px" src="assets/images/icons/${day.weather[0].icon}.png"/></span>

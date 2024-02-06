@@ -30,15 +30,18 @@ header {
 }
 
 .card-container {
-  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  justify-content: space-around;
 }
 
 .forecast-card {
-  width: 180px;
+  width: 200px;
   height: 235px;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-start;
-  padding-left: 10px;
+  padding: 0 10px;
   padding-bottom: 20px;
   background-color: #213b50;
   color: white;
@@ -81,4 +84,25 @@ span {
   background-color: white;
   border-radius: 50%;
   padding: 3px;
+}
+
+/* Media queries */
+
+@media screen and (max-width: 900px) {
+
+  .form, .card-container {
+    width: 70%;
+    margin: 0 auto;
+  }
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .forecast-card {
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    align-items: center;
+  }
 }
