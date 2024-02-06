@@ -105,12 +105,19 @@ function createSearchBtn(name) {
 
 // Render search entries from localStorage 
 function loadStoredSearches() {
-    let storedSearches = JSON.parse(localStorage.getItem("storedSearches"));
+    if (localStorage.getItem("storedSearches")) {
+        let storedSearches = JSON.parse(localStorage.getItem("storedSearches"));
 
-    storedSearches.forEach(searchTerm => {
-        createSearchBtn(searchTerm);
-        restoredButtons.push(searchTerm);
-    });
+        storedSearches.forEach(searchTerm => {
+            createSearchBtn(searchTerm);
+            restoredButtons.push(searchTerm);
+
+        });
+    } else {
+        let storedSearches = ["London"];
+        localStorage.setItem("storedSearches", JSON.stringify(storedSearches));
+        loadStoredSearches();
+    }
 };
 
 
