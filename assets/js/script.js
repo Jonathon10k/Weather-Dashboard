@@ -16,7 +16,7 @@ let restoredButtons = [];
 loadStoredSearches()
 
 // Render initial city forecast
-
+fetchForecast("London");
 
 // Event listener for city search button
 searchBtn.addEventListener("click", event => {
@@ -61,8 +61,8 @@ function renderCards(data) {
     todayHumidity.textContent = `Humidity: ${today.main.humidity} %`;
     cardContainer.innerHTML = "";
 
-// Populate the 5-day forecast container with cards containing OWM forecast data
-  forecasts.forEach(day => {
+    // Populate the 5-day forecast container with cards containing OWM forecast data
+    forecasts.forEach(day => {
         let cardItem = document.createElement("div");
         cardItem.classList.add("forecast-card", "border", "border-secondary", "d-flex", "flex-column");
         cardItem.innerHTML =
