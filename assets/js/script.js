@@ -32,7 +32,7 @@ searchBtn.addEventListener("click", event => {
 
 // Fetch forecast data from OpenWeatherMap API
 function fetchForecast(city) {
-    let queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + API_KEY;
+    let queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + API_KEY;
     console.log(queryURL);
     fetch(queryURL)
         .then(response => response.json())
@@ -119,8 +119,3 @@ function loadStoredSearches() {
         loadStoredSearches();
     }
 };
-
-
-// TO DO
-// 2. Fix forecast data processing
-// 4. Screen sizes
